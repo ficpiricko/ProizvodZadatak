@@ -8,27 +8,35 @@ using System.Web.Mvc;
 using Proizvod.Models;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using System.Diagnostics;
 
 namespace Proizvod.Controllers
 {
     public class ProizvodController : Controller
     {
         ProizvodDB dbhandle = new ProizvodDB();
-        string path = @"C:\Users\Filip\Desktop\proizvodi.json";
+       
+        string path = @"C:\Users\Filip\Git\Proizvod\Proizvod\JSON\proizvodi.json";
+       
+      
         // GET: Proizvod
         public ActionResult Index(bool? db)
         {
            
             if (db == true)
             {
+
+                
                 var proizvodi = dbhandle.VratiProizvode();
                 return View("IndexDB",proizvodi);
             }
             else
             {
             var webClient = new WebClient();
-            var json = webClient.DownloadString(@"C:\Users\Filip\Desktop\proizvodi.json");
-            var proizvodi = JsonConvert.DeserializeObject<Proizvodi>(json);
+
+              
+                var json = webClient.DownloadString(path);
+                var proizvodi = JsonConvert.DeserializeObject<Proizvodi>(json);
                 return View(proizvodi);
             }
            
@@ -41,8 +49,16 @@ namespace Proizvod.Controllers
         }
 
         // GET: Proizvod/Create
-        public ActionResult Create()
+        public ActionResult Create(bool? db)
         {
+            if (db == true)
+            {
+                ViewBag.IsValid = false;
+            }
+            else
+            {
+                ViewBag.IsValid = true;
+            }
             return View();
         }
 
@@ -58,6 +74,7 @@ namespace Proizvod.Controllers
                     { 
                         if (dbhandle.DodajProizvod(proizvod))
                         {
+                            
                             ViewBag.Message = "Uspesno dodat proizvod.";
                             ModelState.Clear();    
                         }
@@ -76,7 +93,8 @@ namespace Proizvod.Controllers
    
                 jsonData = JsonConvert.SerializeObject(proizvodi);
                 System.IO.File.WriteAllText(path, jsonData);
-                return RedirectToAction("Index");
+                
+                    return RedirectToAction("Index");
                 }     
             }
             catch
@@ -91,11 +109,13 @@ namespace Proizvod.Controllers
 
             if (db == true)
             {
+                ViewBag.IsValid = false;
                 var proizvodi = dbhandle.VratiProizvode();
                 return View(proizvodi.Find(x => x.ID == id));
             }
             else
             {
+                ViewBag.IsValid = true;
                 var webClient = new WebClient();
                 var jsonData = System.IO.File.ReadAllText(path);
                 var proizvodi = JsonConvert.DeserializeObject<Proizvodi>(jsonData);
@@ -111,12 +131,13 @@ namespace Proizvod.Controllers
             {
                 if (db == true)
                 {
+                    
                     dbhandle.EditProizvod(proizvod);
                     return RedirectToAction("Index", new { db = true });
                 }
                 else
                 {
-
+                    
                     var jsonData = System.IO.File.ReadAllText(path);
                     var proizvodi = JsonConvert.DeserializeObject<Proizvodi>(jsonData);
 
@@ -130,7 +151,8 @@ namespace Proizvod.Controllers
                         }
                     }
                     jsonData = JsonConvert.SerializeObject(proizvodi);
-                    System.IO.File.WriteAllText(path, jsonData);
+                    System.IO.File.WriteAllText(path, jsonData
+                        );
 
                     return RedirectToAction("Index");
                 }      

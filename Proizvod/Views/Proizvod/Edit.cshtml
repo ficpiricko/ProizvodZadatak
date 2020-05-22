@@ -74,9 +74,17 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        @if (ViewBag.IsValid == true)
+
+        {
+            @Html.ActionLink("Vrati listu json", "Index")
+        }
+        else
+        {
+            @Html.ActionLink("Vrati listu db", "Index", new { db = true })
+        }
+    </div>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
