@@ -8,5 +8,6 @@ namespace Proizvod.Models
     public class Proizvodi
     {
         public List<ProizvodModel> proizvodi { get; set; }
+        
     }
 }

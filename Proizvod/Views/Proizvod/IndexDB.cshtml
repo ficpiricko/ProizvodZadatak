@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Proizvod.Models.ProizvodModel>
+
+@{
+    ViewBag.Title = "IndexDB";
+}
+
+<h2>IndexDB</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { db = true })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Naziv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Opis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kategorija)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Proizvodjac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dobavljac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cena)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Naziv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Opis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kategorija)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Proizvodjac)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dobavljac)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cena)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { db = true, id =item.ID })           
+        </td>
+    </tr>
+}
+
+</table>

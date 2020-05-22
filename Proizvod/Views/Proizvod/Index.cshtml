@@ -14,31 +14,34 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model.proizvodi) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Naziv)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Opis)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Kategorija)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Proizvodjac)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dobavljac)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cena)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new {  id=item.ID }) 
-         
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.proizvodi)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kategorija)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Proizvodjac)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dobavljac)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cena)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+
+            </td>
+        </tr>
+    }
 
 </table>
+
+
