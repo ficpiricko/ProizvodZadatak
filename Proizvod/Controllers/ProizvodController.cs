@@ -6,19 +6,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Proizvod.Models;
-using Newtonsoft.Json.Linq;
-using System.IO;
-using System.Diagnostics;
+
+
 
 namespace Proizvod.Controllers
 {
     public class ProizvodController : Controller
     {
         ProizvodDB dbhandle = new ProizvodDB();
-       
-        string path = @"C:\Users\Filip\Git\Proizvod\Proizvod\JSON\proizvodi.json";
-       
-      
+
+        
+        string path = System.Web.HttpContext.Current.Server.MapPath("~/JSON/") + "proizvodi.json";
+        
+
         // GET: Proizvod
         public ActionResult Index(bool? db)
         {
