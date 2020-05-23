@@ -16,7 +16,7 @@ namespace Proizvod.Controllers
     {
         ProizvodDB dbhandle = new ProizvodDB();
        
-        string path = @"C:\Users\Filip\Git\Proizvod\Proizvod\JSON\proizvodi.json";
+        string path = System.Web.HttpContext.Current.Server.MapPath("~/JSON/") + "proizvodi.json";
        
       
         // GET: Proizvod
